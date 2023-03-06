@@ -32,9 +32,7 @@ TreeNode* insertNode(TreeNode* root, string name, string phone, int id) {
         root->left = insertNode(root->left, name, phone, id);
     } else if (name > root->name) {
         root->right = insertNode(root->right, name, phone, id);
-    } else {
-        cout << "���m�W�w�s�b�I\n";
-    }
+    } 
     return root;
 }
 TreeNode* deleteByName(TreeNode* root, string name) {
@@ -144,7 +142,7 @@ TreeNode* findByName(TreeNode* root, string name) {
     return NULL;
 }
 
-// �R�����ʾ�
+// 嚙磋嚙踝蕭嚙踝蕭嚙褊橘蕭
 void deleteTree(TreeNode* root) {
     if (root == NULL) {
         return;
@@ -157,68 +155,67 @@ int main() {
     TreeNode* root = NULL;
     char choice;
     while (true) {
-        cout << "�п��J�ާ@�G\n"
-             << "i: �s�W�`�I\n"
-             << "d: �R���m�W�ۦP�`�I\n"
-             << "r: �R���s���ۦP�`�I\n"
-             << "f: �d���m�W�ۦP�`�I\n"
-             << "l: �L�X�`�I���e\n"
-             << "q: ���}�{��\n";
+        cout << "請輸入操作：\n"
+             << "i: 新增節點\n"
+             << "d: 刪除姓名相同節點\n"
+             << "r: 刪除編號相同節點\n"
+             << "f: 尋找姓名相同節點\n"
+             << "l: 印出節點內容\n"
+             << "q: 離開程式\n";
         cin >> choice;
         switch (choice) {
             case 'i': {
                 string name, phone;
-                cout << "�п��J�m�W�M�q�ܡA�H�Ů��j�}�G";
+                cout << "請輸入姓名和電話，以空格隔開;";
                 cin >> name >> phone;
                 root = insertNode(root, name, phone, rand() % 1000000 + 1);
-                cout << "�I";
                 break;
             }
             case 'd': {
                 string name;
-                cout << "�п��J���R�����m�W�G";
+                cout << "請輸入欲刪除的姓名：";
                 cin >> name;
                 root = deleteByName(root, name);
                 break;
             }
             case 'r': {
                 int id;
-                cout << "�п��J���R�����s���G";
+                cout << "請輸入欲刪除的編號：";
                 cin >> id;
                 root = deleteById(root, id);
                 break;
             }
             case 'f': {
                 string name;
-                cout << "�п��J���d�䪺�m�W�G";
+                cout << "請輸入欲查找的姓名：";
                 cin >> name;
                 TreeNode* node = findByName(root, name);
                 if (node != NULL) {
-                    cout << "�`�I�s���G" << node->id << "\n";
-                    cout << "�m�W�G" << node->name << "\n";
-                    cout << "�q�ܡG" << node->phone << "\n";
+                    cout << "節點編號：" << node->id << "\n";
+                    cout << "姓名：" << node->name << "\n";
+                    cout << "電話：" << node->phone << "\n";
                 } else {
-                    cout << "�䤣���ŦX���󪺸`�I�I\n";
+                    cout << "找不到符合條件的節點！\n";
                 }
                 break;
             }
             case 'l': {
-                cout << "\n���ǹM���G";
+                cout << "先序列印:"<<"\n";
                 printPreorder(root);
-                cout << "���ǹM���G";
+                cout << "\n中序列印:"<<"\n";
                 printInorder(root);
-                cout << "\n���ǹM���G";
+                cout << "\n後序列印:"<<"\n";
                 printPostorder(root);
                 cout << "\n";
                 break;
             }
             case 'q': {
                 deleteTree(root);
-                cout << "�{���w�����C\n";
+                cout << "程式結束。\n";
                 return 0;
             }
             default:
-                cout << "�L�Ī����J�I\n";
+                cout << "錯誤的指令" <<"\n";
                 break;
         }
     }
